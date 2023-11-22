@@ -1,0 +1,55 @@
+.body {
+  background: rgb(15, 15, 15);
+  height: 100vh;
+  margin: 0;
+  overflow: auto;
+}
+
+.container {
+  max-width: 750px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: rgb(57, 67, 79, 1);
+  color: white;
+  margin: 10px auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Estilos para los campos de formulario */
+.form-control {
+  background-color: rgb(57, 67, 79, 1);
+  color: white;
+  border: 1px solid rgb(195, 195, 195); /* Borde gris en los cuatro lados */
+  border-radius: 3px;
+  padding: 10px;
+}
+
+/* Estilos para el texto del placeholder */
+.form-control::placeholder {
+  color: #999;
+}
+
+label {
+  font-weight: bold;
+  color: white;
+}
+
+.separator {
+  margin: 20px 0;
+}
+
+.btn-primary {
+  margin-top: 10px;
+  width: 350px;
+  background-color: #0c3855;
+  color: white;
+  border: #0c3855;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+}
