@@ -1,0 +1,76 @@
+<div class="body">
+  <div class="container">
+    <h1>Registrar Cliente</h1>
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="flex-form">
+      <div class="flex-row">
+        <div class="form-group">
+          <label for="nombre">Nombre(s)</label>
+          <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Ej. Juan" required>
+        </div>
+        <div class="form-group">
+          <label for="apellidoPaterno">Apellido Paterno</label>
+          <input formControlName="apellidoPaterno" type="text" class="form-control" id="apellidoPaterno"
+            placeholder="Ej. Pérez" required>
+        </div>
+        <div class="form-group">
+          <label for="apellidoMaterno">Apellido Materno</label>
+          <input formControlName="apellidoMaterno" type="text" class="form-control" id="apellidoMaterno"
+            placeholder="Ej. García (opcional)">
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="form-group">
+          <label for="calle">Calle</label>
+          <input formControlName="calle" type="text" class="form-control" id="calle" placeholder="Ej. Calle Principal" required>
+        </div>
+        <div class="form-group">
+          <label for="numeroExterior">N° Ext.</label>
+          <input formControlName="numeroExterior" type="text" class="form-control" id="numeroExterior"
+            placeholder="Ej. 123" required>
+        </div>
+        <div class="form-group">
+          <label for="numeroInterior">N° Int.</label>
+          <input formControlName="numeroInterior" type="text" class="form-control" id="numeroInterior"
+            placeholder="Ej. 4 (opcional)">
+        </div>
+        <div class="form-group">
+          <label for="codigoPostal">Código Postal</label>
+          <input formControlName="codigoPostal" type="text" class="form-control" id="codigoPostal"
+            placeholder="Ej. 12345" required>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="form-group">
+          <label for="colonia">Colonia</label>
+          <input formControlName="colonia" type="text" class="form-control" id="colonia" placeholder="Ej. Colonia Residencial" required>
+        </div>
+        <div class="form-group">
+          <label for="municipio">Municipio</label>
+          <input formControlName="municipio" type="text" class="form-control" id="municipio" placeholder="Ej. Ciudad Juárez" required>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input formControlName="estado" type="text" class="form-control" id="estado" placeholder="Ej. Chihuahua" required>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="form-group">
+          <label for="rfc">RFC</label>
+          <input formControlName="rfc" type="text" class="form-control" id="rfc" placeholder="Ej. ABC123456XYZ (opcional)" >
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo Electrónico</label>
+          <input formControlName="correo" type="email" class="form-control" id="correo" placeholder="Ej. correo@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input formControlName="telefono" type="tel" class="form-control" id="telefono" placeholder="Ej. 555-1234" required>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="!botonRegistrarHabilitado()">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
