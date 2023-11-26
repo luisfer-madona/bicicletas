@@ -1,17 +1,6 @@
-.body {
-  background: rgb(15, 15, 15);
-  height: 100vh;
-  margin: 0;
-  overflow: auto;
-}
-
-.container {
-  max-width: 750px;
-  padding: 20px;
-  border-radius: 5px;
-  background-color: rgb(57, 67, 79, 1);
-  color: white;
-  margin: 10px auto;
+form {
+  margin-left: 10rem;
+  margin-right: 10rem;
 }
 
 .form-group {
@@ -36,6 +25,7 @@
 label {
   font-weight: bold;
   color: white;
+  margin-bottom: 5px;
 }
 
 .separator {

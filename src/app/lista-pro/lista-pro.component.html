@@ -1,0 +1,43 @@
+<div class="card">
+    <h5 class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <span>Lista de productos</span>
+            <button type="button" class="btn btn-primary" [routerLink]="['/productos', 0]">Registrar producto</button>
+        </div>
+    </h5>
+    <div class="card-body">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Cantidad (stock)</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of ListaProductos">
+                    <th scope="row">{{producto.id}}</th>
+                    <td>{{producto.sku}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.marca}}</td>
+                    <td>{{producto.modelo}}</td>
+                    <td>{{producto.color}}</td>
+                    <td>{{producto.material}}</td>
+                    <td>{{producto.cantidad}}</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm move-right"
+                            [routerLink]="['/productos', producto.id]">Modificar</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-2"
+                            (click)="eliminarProducto(producto)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,42 +1,113 @@
-<div class="body">
-  <div class="container">
-    <h1>Registro de Productos</h1>
-    <form>
-      <div class="form-group">
-        <label for="nombre">Nombre del producto</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del producto">
+<div class="card">
+  <h5 class="card-header">
+    {{producto ? 'Actualización': 'Registro'}} de producto
+  </h5>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-2">
+          <div class="form-group">
+            <label for="id">Id</label>
+            <input type="text" class="form-control" formControlName="id" id="id"
+              placeholder="Ingrese el id del producto" [ngClass]="{ 'is-invalid': submitted && f['id'].errors }">
+            <div *ngIf="submitted && f['id'].errors" class="invalid-feedback">
+              <div *ngIf="f['id'].errors['required']">El id es requerido</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-10">
+          <div class="form-group">
+            <label for="nombre">Nombre del producto</label>
+            <input type="text" class="form-control" formControlName="nombre" id="nombre"
+              placeholder="Ingrese el nombre del producto"
+              [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors }">
+            <div *ngIf="submitted && f['nombre'].errors" class="invalid-feedback">
+              <div *ngIf="f['nombre'].errors['required']">El nombre es requerido</div>
+              <div *ngIf="f['nombre'].errors['minlength']">El nombre debe tener al menos 3 caracteres</div>
+              <div *ngIf="f['nombre'].errors['maxlength']">El nombre debe tener máximo 50 caracteres</div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="marca">Marca</label>
-        <input type="text" class="form-control" id="marca" placeholder="Ingrese la marca del producto">
+        <input type="text" class="form-control" formControlName="marca" id="marca"
+          placeholder="Ingrese la marca del producto" [ngClass]="{ 'is-invalid': submitted && f['marca'].errors }">
+        <div *ngIf="submitted && f['marca'].errors" class="invalid-feedback">
+          <div *ngIf="f['marca'].errors['required']">La marca es requerida</div>
+          <div *ngIf="f['marca'].errors['minlength']">La marca debe tener al menos 3 caracteres</div>
+          <div *ngIf="f['marca'].errors['maxlength']">La marca debe tener máximo 50 caracteres</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="modelo">Modelo</label>
-        <input type="text" class="form-control" id="modelo" placeholder="Ingrese el modelo del producto">
+        <input type="text" class="form-control" formControlName="modelo" id="modelo"
+          placeholder="Ingrese el modelo del producto" [ngClass]="{ 'is-invalid': submitted && f['modelo'].errors }">
+        <div *ngIf="submitted && f['modelo'].errors" class="invalid-feedback">
+          <div *ngIf="f['modelo'].errors['required']">El modelo es requerido</div>
+          <div *ngIf="f['modelo'].errors['minlength']">El modelo debe tener al menos 3 caracteres</div>
+          <div *ngIf="f['modelo'].errors['maxlength']">El modelo debe tener máximo 50 caracteres</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="color">Color</label>
-        <input type="text" class="form-control" id="color" placeholder="Ingrese el color del producto">
+        <input type="text" class="form-control" formControlName="color" id="color"
+          placeholder="Ingrese el color del producto" [ngClass]="{ 'is-invalid': submitted && f['color'].errors }">
+        <div *ngIf="submitted && f['color'].errors" class="invalid-feedback">
+          <div *ngIf="f['color'].errors['required']">El modelo es requerido</div>
+          <div *ngIf="f['color'].errors['minlength']">El modelo debe tener al menos 3 caracteres</div>
+          <div *ngIf="f['color'].errors['maxlength']">El modelo debe tener máximo 50 caracteres</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="descripcion">Descripción</label>
-        <textarea class="form-control" id="descripcion" rows="3" placeholder="Ingrese la descripción del producto"></textarea>
+        <textarea class="form-control" formControlName="descripcion" id="descripcion" rows="3"
+          placeholder="Ingrese la descripción del producto"
+          [ngClass]="{ 'is-invalid': submitted && f['descripcion'].errors }">
+        </textarea>
+        <div *ngIf="submitted && f['descripcion'].errors" class="invalid-feedback">
+          <div *ngIf="f['descripcion'].errors['required']">La marca es requerida</div>
+          <div *ngIf="f['descripcion'].errors['minlength']">La marca debe tener al menos 10 caracteres</div>
+          <div *ngIf="f['descripcion'].errors['maxlength']">La marca debe tener máximo 200 caracteres</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="sku">Código SKU</label>
-        <input type="text" class="form-control" id="sku" placeholder="Ingrese el código SKU del producto">
+        <input type="text" class="form-control" formControlName="sku" id="sku"
+          placeholder="Ingrese el código SKU del producto" [ngClass]="{ 'is-invalid': submitted && f['sku'].errors }">
+        <div *ngIf="submitted && f['sku'].errors" class="invalid-feedback">
+          <div *ngIf="f['sku'].errors['required']">El código SKU es requerido</div>
+          <div *ngIf="f['sku'].errors['minlength']">El código SKU debe tener al menos 10 caracteres</div>
+          <div *ngIf="f['sku'].errors['maxlength']">El código SKU debe tener máximo 20 caracteres</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="material">Material</label>
-        <input type="text" class="form-control" id="material" placeholder="Ingrese el material del producto">
+        <input type="text" class="form-control" formControlName="material" id="material"
+          placeholder="Ingrese el material del producto"
+          [ngClass]="{ 'is-invalid': submitted && f['material'].errors }">
+        <div *ngIf="submitted && f['material'].errors" class="invalid-feedback">
+          <div *ngIf="f['material'].errors['required']">El material es requerido</div>
+          <div *ngIf="f['material'].errors['minlength']">El material debe tener al menos 3 caracteres</div>
+          <div *ngIf="f['material'].errors['maxlength']">El material debe tener máximo 25 caracteres</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="cantidad">Cantidad de productos</label>
-        <input type="number" class="form-control" id="cantidad" placeholder="Ingrese la cantidad de productos">
+        <input type="number" class="form-control" formControlName="cantidad" id="cantidad"
+          placeholder="Ingrese la cantidad de productos"
+          [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors }">
+        <div *ngIf="submitted && f['cantidad'].errors" class="invalid-feedback">
+          <div *ngIf="f['cantidad'].errors['required']">La cantidad es requerida</div>
+          <div *ngIf="f['cantidad'].errors['min']">La cantidad debe ser igual o mayor que 0</div>
+          <div *ngIf="f['cantidad'].errors['max']">La cantidad debe ser menor o igual que 100000</div>
+        </div>
       </div>
       <div class="separator"></div>
       <div class="text-center">
-        <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+        <button class="btn btn-primary btn-lg">
+          {{producto ? 'Modificar' : 'Registrar'}}
+        </button>
       </div>
     </form>
   </div>

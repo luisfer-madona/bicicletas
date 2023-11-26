@@ -1,25 +1,25 @@
 const sqlite3 = require('sqlite3');
 const express = require("express");
 const cors = require('cors');
- 
+
 var bodyParser = require('body-parser');
- 
+
 var app = express();
 app.use(cors())
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
- 
- 
+
+
 const HTTP_PORT = 8000
 app.listen(HTTP_PORT, () => {
     console.log("Server is listening on port " + HTTP_PORT);
 });
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
     console.log('Do not shut down the app on user log-off');
     //server.close();
-  });
- 
+});
+
 const db = new sqlite3.Database('./bicicletas.db', (err) => {
     if (err) {
         console.error("Error opening database " + err.message);
@@ -64,8 +64,8 @@ const db = new sqlite3.Database('./bicicletas.db', (err) => {
     }
 });
 
+// GET
 app.get("/productos/", (req, res, next) => {
-    console.log('get params',req.query);
     if (req.query && req.query.nombre) {
         busqueda = '%' + req.query.nombre + '%';
     } else {
@@ -79,4 +79,58 @@ app.get("/productos/", (req, res, next) => {
         }
         res.status(200).json(rows);
     });
+});
+
+// GET by id
+app.get("/productos/:id", (req, res, next) => {
+    db.get("SELECT * FROM productos where id = ?", [req.params.id], (err, row) => {
+        if (err) {
+            res.status(400).json({ "error": err.message });
+            return;
+        }
+        res.status(200).json(row);
+    });
+});
+
+// POST
+app.post("/productos/", (req, res, next) => {
+    var reqBody = req.body;
+    db.run("INSERT INTO productos (nombre, marca, modelo, color, descripcion, sku, material, cantidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [reqBody.nombre, reqBody.marca, reqBody.modelo, reqBody.color, reqBody.descripcion, reqBody.sku, reqBody.material, reqBody.cantidad],
+        function (err, result) {
+            if (err) {
+                res.status(400).json({ "error": err.message })
+                return;
+            }
+            res.status(201).json({
+                "id: ": this.lastID, "nombre": reqBody.nombre
+            })
+        });
+});
+
+// PUT
+app.put("/productos/", (req, res, next) => {
+    var reqBody = req.body;
+    db.run(`UPDATE productos set nombre = ?, marca = ?, modelo = ?, color = ?, descripcion = ?, sku = ?, material = ?, cantidad = ? WHERE id = ?`,
+        [reqBody.nombre, reqBody.marca, reqBody.modelo, reqBody.color, reqBody.descripcion, reqBody.sku, reqBody.material, reqBody.cantidad, reqBody.id],
+        function (err, result) {
+            if (err) {
+                res.status(400).json({ "error": res.message })
+                return;
+            }
+            res.status(200).json({ updatedID: this.changes });
+        });
+});
+
+// DELETE
+app.delete("/productos/:id", (req, res, next) => {
+    db.run(`DELETE FROM productos WHERE id = ?`,
+        req.params.id,
+        function (err, result) {
+            if (err) {
+                res.status(400).json({ "error": res.message })
+                return;
+            }
+            res.status(200).json({ deletedID: this.changes })
+        });
 });
