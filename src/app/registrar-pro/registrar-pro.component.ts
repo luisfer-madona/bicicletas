@@ -62,7 +62,8 @@ export class RegistrarProComponent implements OnInit {
             cantidad: this.producto.cantidad
           });
         } else {
-          this.registerForm.setValue({
+          // Para pruebas rápidas solamente
+          /*this.registerForm.setValue({
             id: 0,
             nombre: 'Llanta para bicicleta',
             marca: 'Marca de llanta',
@@ -72,7 +73,7 @@ export class RegistrarProComponent implements OnInit {
             sku: 'LLANT-GEN-NEG-12',
             material: 'Material',
             cantidad: 10
-          });
+          });*/
         }
       });
     });
