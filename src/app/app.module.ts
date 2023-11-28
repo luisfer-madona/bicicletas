@@ -10,6 +10,7 @@ import { RegistrarCliComponent } from './registrar-cli/registrar-cli.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductoService } from './servicios/producto.service';
 import { ListaProComponent } from './lista-pro/lista-pro.component';
+import { ListaCliComponent } from './lista-cli/lista-cli.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ListaProComponent } from './lista-pro/lista-pro.component';
     HomeComponent,
     RegistrarProComponent,
     RegistrarCliComponent,
-    ListaProComponent
+    ListaProComponent,
+    ListaCliComponent
   ],
   imports: [
     BrowserModule,
