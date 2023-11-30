@@ -27,7 +27,7 @@ export class RegistrarCliComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private clienteService: ClienteService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({

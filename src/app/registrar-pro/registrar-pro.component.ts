@@ -16,11 +16,6 @@ export class RegistrarProComponent implements OnInit {
   producto?: Producto;
   sub: any;
 
-  alertOptions = {
-    autoClose: true,
-    keepAfterRouteChange: true
-  };
-
   constructor(
     private formBuilder: FormBuilder,
     private ngZone: NgZone,

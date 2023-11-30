@@ -1,0 +1,193 @@
+<div class="card">
+    <h5 class="card-header">
+        Nueva venta
+    </h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">SKU</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Total</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let producto of ListaProductosVenta">
+                                <td scope="row">{{producto.sku}}</td>
+                                <td>{{producto.nombre}}</td>
+                                <td>{{producto.precio | currency}}</td>
+                                <td>{{producto.cantidad}}</td>
+                                <td>{{producto.total | currency}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        (click)="eliminarProducto(producto)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="hstack gap-4">
+                    <div class="vr"></div>
+                    <div class="w-100">
+                        <form [formGroup]="ventaForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="fecha" class="mb-2">Fecha</label>
+                                        <input type="date" class="form-control" formControlName="fecha" id="fecha"
+                                            placeholder="Ingrese la fecha"
+                                            [ngClass]="{ 'is-invalid': submitted && f['fecha'].errors }">
+                                        <div *ngIf="submitted && f['fecha'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['fecha'].errors['required']">La fecha es requerida</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <label for="cliente" class="mb-2">Cliente</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" formControlName="cliente" id="cliente"
+                                            placeholder="Seleccione un cliente"
+                                            [ngClass]="{ 'is-invalid': submitted && f['cliente'].errors }">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            (click)="abrirModalClientes()">
+                                            <i class="bi bi-person"></i>
+                                        </button>
+                                    </div>
+                                    <div *ngIf="submitted && f['cliente'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['cliente'].errors['required']">El cliente es requerido</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 mb-5 d-flex justify-content-end">
+                                <div class="col-auto">
+                                    <button type="button" class="btn btn-primary" (click)="abrirModalProductos()">
+                                        <i class="bi bi-plus-lg"></i>
+                                        Añadir producto
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="hstack gap-2">
+                                    <h5 class="text-primary">Subtotal:</h5>
+                                    <h5>{{ subtotal | currency }}</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="hstack justify-content-between gap-2">
+                                    <div class="d-flex flex-columns gap-2">
+                                        <h5 class="text-primary">Descuento:</h5>
+                                        <h5>{{ descuento | currency }} ({{ porcentajeDescuento }}%)</h5>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary btn-sm" (click)="seleccionarDescuento()">
+                                        Ingresar descuento
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="hstack gap-2">
+                                    <h3 class="text-primary">Total:</h3>
+                                    <h3>{{ total | currency }}</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-12 d-flex">
+                                    <button class="btn btn-danger btn-lg w-100">
+                                        Guardar venta
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Clientes -->
+<div class="modal fade" id="customerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="customerModalLabel">Seleccione un cliente</h1>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cliente of ListaClientes">
+                                <td>{{cliente.nombre}}</td>
+                                <td>{{cliente.apellidoPaterno}} {{cliente.apellidoMaterno}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        (click)="seleccionarCliente(cliente)">Seleccionar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Productos -->
+<div class="modal fade" id="productModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="productModalLabel">Seleccione un producto</h1>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let producto of ListaProductos">
+                                <td scope="row">{{producto.nombre}}</td>
+                                <td>{{producto.precio | currency}}</td>
+                                <td>{{producto.cantidad}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-sm"
+                                        (click)="seleccionarProducto(producto)">Seleccionar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

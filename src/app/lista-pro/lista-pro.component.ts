@@ -26,7 +26,6 @@ export class ListaProComponent implements OnInit {
 
   // Eliminar un producto
   eliminarProducto(data: Producto) {
-
     Swal.fire({
       title: 'Eliminar el producto?',
       text: 'Este proceso es irreversible.',

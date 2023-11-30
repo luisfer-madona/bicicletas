@@ -1,6 +1,8 @@
-<div class="body">
-  <div class="container">
-    <h1>{{ cliente ? 'Actualizar Cliente' : 'Registrar Cliente' }}</h1>
+<div class="card">
+  <h5 class="card-header">
+    {{cliente ? 'Actualización': 'Registro'}} de cliente
+  </h5>
+  <div class="card-body">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex-form">
       <div class="flex-row">
         <div class="form-group">

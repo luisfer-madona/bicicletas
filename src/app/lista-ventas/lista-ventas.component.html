@@ -1,0 +1,101 @@
+<div class="card">
+    <h5 class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <span>Lista de ventas</span>
+            <button type="button" class="btn btn-primary" [routerLink]="['/ventas/crear']">Nueva venta</button>
+        </div>
+    </h5>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-dark table-striped text-nowrap">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Descuento</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let venta of ListaVentas">
+                        <th scope="row">{{venta.id}}</th>
+                        <td>{{venta.fecha | date}}</td>
+                        <td>{{venta.cliente}}</td>
+                        <td>{{venta.subtotal | currency}}</td>
+                        <td>{{(venta.subtotal * (venta.descuento / 100)) | currency}} ({{venta.descuento}}%)</td>
+                        <td>{{venta.total | currency}}</td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm move-right"
+                                (click)="abrirModalDetalles(venta)">Detalles</button>
+                            <button type="button" class="btn btn-danger btn-sm ms-2"
+                                (click)="eliminarVenta(venta)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Detalles -->
+<div class="modal fade" id="detailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailsModalLabel">Detalles de venta</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-5">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="fecha" class="mb-2">Fecha</label>
+                            <input type="text" class="form-control" id="fecha" [value]="VentaSeleccionada?.fecha"
+                                placeholder="Ingrese la fecha" [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="cliente" class="mb-2">Cliente</label>
+                            <input type="text" class="form-control" id="cliente" [value]="VentaSeleccionada?.cliente"
+                                placeholder="Seleccione un cliente" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <h5>
+                        Órdenes
+                    </h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let orden of VentaSeleccionada?.ordenes">
+                                <td>{{orden.id}}</td>
+                                <td>{{orden.producto}}</td>
+                                <td>{{orden.precio}}</td>
+                                <td>{{orden.cantidad}}</td>
+                                <td>{{orden.precio * orden.cantidad}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

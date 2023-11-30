@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductoService } from './servicios/producto.service';
 import { ListaProComponent } from './lista-pro/lista-pro.component';
 import { ListaCliComponent } from './lista-cli/lista-cli.component';
+import { NuevaVentaComponent } from './nueva-venta/nueva-venta.component';
+import { ListaVentasComponent } from './lista-ventas/lista-ventas.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ListaCliComponent } from './lista-cli/lista-cli.component';
     RegistrarProComponent,
     RegistrarCliComponent,
     ListaProComponent,
-    ListaCliComponent
+    ListaCliComponent,
+    NuevaVentaComponent,
+    ListaVentasComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@
   <div class="container h-100">
     <div class="row align-middle">
       <div class="col-md-6 col-lg-4 column">
-        <a href="#" class="text-decoration-none">
+        <a href="#" class="text-decoration-none" [routerLink]="['/ventas/crear']">
         <div class="card gr-1">
           <div class="txt">
             <h1>VENTA </h1>
@@ -33,7 +33,7 @@
         <a href="#" class="text-decoration-none" [routerLink]="['/productos']">
         <div class="card gr-3">
           <div class="txt">
-            <h1>MODIFICAR</h1>
+            <h1>LISTA DE PRODUCTOS</h1>
             <p>Modificar caracteristicas o inventario de producto.</p>
           </div>
         <div class="ico-card">
@@ -48,11 +48,11 @@
     <div class="row align-middle">
 
       <div class="col-md-6 col-lg-4 column">
-        <a href="#" class="text-decoration-none">
+        <a href="#" class="text-decoration-none" [routerLink]="['/ventas']">
         <div class="card gr-4">
           <div class="txt">
-            <h1>FACTURAR</h1>
-            <p>Generar una factura para un cliente registrado.  </p>
+            <h1>LISTA DE VENTAS</h1>
+            <p>Muestra la lista de ventas en el sistema.</p>
           </div>
           <div class="ico-card">
             <img src="../../assets/icons/icono-facturar.svg" >
@@ -61,7 +61,7 @@
       </a>
       </div>
       <div class="col-md-6 col-lg-4 column">
-        <a href="#" class="text-decoration-none" routerLink="/registrar-cliente">
+        <a href="#" class="text-decoration-none" [routerLink]="['/clientes', 0]">
         <div class="card gr-5">
           <div class="txt">
             <h1>REGISTRAR CLIENTE</h1>
@@ -74,10 +74,10 @@
         </a>
       </div>
       <div class="col-md-6 col-lg-4 column">
-        <a href="#" class="text-decoration-none"  routerLink="/clientes">
+        <a href="#" class="text-decoration-none" [routerLink]="['/clientes']">
         <div class="card gr-6">
           <div class="txt">
-            <h1>MODIFICAR CLIENTE</h1>
+            <h1>LISTA DE CLIENTES</h1>
             <p>Modificar a un cliente existente.</p>
           </div>
         <div class="ico-card">

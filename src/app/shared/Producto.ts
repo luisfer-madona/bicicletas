@@ -9,4 +9,5 @@ export class Producto {
     material!: string;
     cantidad!: number;
     precio!: number;
+    total!: number;
 }
